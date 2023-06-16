@@ -31,10 +31,15 @@ function App() {
       content,
       isDone: false,
     };
-
-    setTodos([...todos, newTodos]);
-    setTitle("");
-    setContent("");
+    if (title === "") {
+      alert("제목을 입력하세요!");
+    } else if (content === "") {
+      alert("내용을 입력하세요!");
+    } else {
+      setTodos([...todos, newTodos]);
+      setTitle("");
+      setContent("");
+    }
   };
 
   // todo 삭제
@@ -48,32 +53,8 @@ function App() {
     const clicked = todos.filter((todo) => todo.id === id)[0];
     clicked.isDone = !clicked.isDone;
     const filteredTodos = todos.filter((todo) => todo.id !== id);
-    setTodos([...filteredTodos, clicked]); // working 완료
+    setTodos([...filteredTodos, clicked]);
   };
-
-  // const clickCancelHandler = (id) => {
-  //   const done = todos.filter((todo) => todo.id === id)[0];
-  //   if (done) {
-  //     return !done.isDone;
-  //   }
-  //   setTodos(done);
-  // };
-
-  // const done = todos.filter((todo) => todo.id === id)[0];
-  // const filteredTodos = todos.filter((todo) => todo.id !== id);
-  // const newTodos = todos.map((todo) => {
-  //   if (todo.id === id) {
-  //     todo.isDone === true;
-  //     return setTodos(done);
-  //   } else {
-  //     todo.isDone === false;
-  //     return setTodos(filteredTodos);
-  //   }
-  // });
-
-  // 1. 클릭했을 때 클릭한놈 찾기(id같은)
-  // 2. isDone을 토글링한다.
-  // 3. setTodos의 인자로 변경된 배열 자체를 넣어준다.
 
   return (
     <div className="layout">
@@ -111,37 +92,6 @@ function App() {
                 clickRemoveTodosHandler={clickRemoveTodosHandler}
                 clickDoneHandler={clickDoneHandler}
               />
-              // <div key={item.id} className="working-box-flex">
-              //   <div className="working-box">
-              //     <div className="main-title">{item.title}</div>
-              //     <div className="main-content">{item.content}</div>
-              //     <div className="btn">
-              //       <button
-              //         className="del-btn"
-              //         onClick={() => {
-              //           clickRemoveTodosHandler(item.id);
-              //         }}
-              //       >
-              //         삭제하기
-              //       </button>{" "}
-              //       &nbsp;
-              //       <button
-              //         className="done-btn"
-              //         onClick={() => {
-              //           clickDoneHandler(item.id);
-              //         }}
-              //       >
-              //         {item.isDone ? "취소" : "완료"}
-              //       </button>
-              //     </div>
-              //   </div>
-              // </div>
-              // <Todo
-              //   key={item.id}
-              //   item={item}
-              //   removeTodoFunction={clickRemoveTodoHandler}
-              //   clickDoneHandler={clickDoneHandler}
-              // />
             );
           }
         })}
