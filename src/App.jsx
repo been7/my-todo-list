@@ -56,6 +56,12 @@ function App() {
     setTodos([...filteredTodos, clicked]);
   };
 
+  const enterkeyHandler = (event) => {
+    if (event.key === "Enter") {
+      clickAddBtnHandler();
+    }
+  };
+
   return (
     <div className="layout">
       <header className="header">
@@ -72,6 +78,7 @@ function App() {
           />
           <div className="content">내용</div>
           <input
+            onKeyUp={enterkeyHandler}
             className="input-content"
             value={content}
             onChange={contentChangeHandler}
